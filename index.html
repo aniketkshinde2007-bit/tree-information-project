@@ -1,0 +1,184 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tree Information Project</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f7f0;
+      color: #24452e;
+      margin: 0;
+      text-align: center;
+    }
+
+    header {
+      background: #176b43;
+      color: white;
+      padding: 25px 10px;
+    }
+
+    main {
+      max-width: 850px;
+      margin: 25px auto;
+      padding: 15px;
+    }
+
+    .trees {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+    .card, #details {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 3px 10px #00000012;
+    }
+
+    .leaf {
+      font-size: 45px;
+    }
+
+    button {
+      background: #176b43;
+      color: white;
+      border: none;
+      padding: 12px 18px;
+      border-radius: 7px;
+      cursor: pointer;
+      margin-top: 8px;
+    }
+
+    button:hover {
+      background: #104c30;
+    }
+
+    #details {
+      display: none;
+      margin-top: 20px;
+      text-align: left;
+      line-height: 1.7;
+    }
+
+    #details h2 {
+      color: #176b43;
+    }
+
+    .back {
+      background: #52616b;
+    }
+
+    footer {
+      padding: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>🌳 Tree Information Project</h1>
+    <p>Discover the importance of trees</p>
+  </header>
+
+  <main>
+    <h2>Select a Tree</h2>
+    <p>Choose a tree to explore its information.</p>
+
+    <div class="trees" id="trees"></div>
+
+    <section id="details" aria-live="polite">
+      <h2 id="name"></h2>
+      <p><b>Scientific Name:</b> <span id="scientific"></span></p>
+      <p><b>Description:</b> <span id="description"></span></p>
+      <p><b>Habitat:</b> <span id="habitat"></span></p>
+      <p><b>Benefits:</b> <span id="benefits"></span></p>
+      <p><b>Uses:</b> <span id="uses"></span></p>
+      <button class="back" onclick="showHome()">Back to Trees</button>
+    </section>
+  </main>
+
+  <footer>Tree Information Project | Educational Website</footer>
+
+  <script>
+    const treeData = [
+      {
+        name: "Neem Tree",
+        scientific: "Azadirachta indica",
+        description: "An evergreen tree with many branches and green leaves.",
+        habitat: "Common in tropical and subtropical regions, including India.",
+        benefits: "Provides shade and supports local biodiversity.",
+        uses: "Neem products are used in traditional practices and agriculture."
+      },
+      {
+        name: "Banyan Tree",
+        scientific: "Ficus benghalensis",
+        description: "A large tree with a wide canopy and aerial roots.",
+        habitat: "Tropical regions, including many parts of India.",
+        benefits: "Provides shade, shelter and food for wildlife.",
+        uses: "Used for shade and valued in traditional practices."
+      },
+      {
+        name: "Mango Tree",
+        scientific: "Mangifera indica",
+        description: "An evergreen tree that produces mango fruits.",
+        habitat: "Warm tropical and subtropical climates.",
+        benefits: "Provides nutritious fruits and shade.",
+        uses: "Mangoes are eaten fresh or used to prepare juices and pickles."
+      },
+      {
+        name: "Peepal Tree",
+        scientific: "Ficus religiosa",
+        description: "A large tree known for its heart-shaped leaves.",
+        habitat: "Warm regions, including the Indian subcontinent.",
+        benefits: "Provides shade and supports birds and other wildlife.",
+        uses: "Planted for shade and valued in cultural traditions."
+      }
+    ];
+
+    const treeContainer = document.getElementById("trees");
+
+    treeData.forEach((tree, index) => {
+      const card = document.createElement("div");
+      card.className = "card";
+
+      const icon = document.createElement("div");
+      icon.className = "leaf";
+      icon.textContent = "🌳";
+
+      const title = document.createElement("h3");
+      title.textContent = tree.name;
+
+      const button = document.createElement("button");
+      button.textContent = "View Information";
+      button.onclick = () => showTree(index);
+
+      card.append(icon, title, button);
+      treeContainer.appendChild(card);
+    });
+
+    function showTree(index) {
+      const tree = treeData[index];
+
+      document.getElementById("name").textContent = tree.name;
+      document.getElementById("scientific").textContent = tree.scientific;
+      document.getElementById("description").textContent = tree.description;
+      document.getElementById("habitat").textContent = tree.habitat;
+      document.getElementById("benefits").textContent = tree.benefits;
+      document.getElementById("uses").textContent = tree.uses;
+
+      treeContainer.style.display = "none";
+      document.getElementById("details").style.display = "block";
+    }
+
+    function showHome() {
+      treeContainer.style.display = "grid";
+      document.getElementById("details").style.display = "none";
+    }
+  </script>
+</body>
+</html>
